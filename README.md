@@ -4,9 +4,9 @@ Video classification using VGG16 as a feature extractor and seasoning with RNN. 
 
 > A simple RNN is used to better classify temporal frame sequences from videos.
 
-Cricket bowling             |  Cricket batting
+Cricket batting           |  Cricket batting/bowling
 :-------------------------:|:-------------------------:
-![](https://github.com/saimj7/saimj7/blob/master/dino.gif)  |  ![](https://github.com/saimj7/saimj7/blob/master/dino.gif)
+![bat](mylib/misc/bat.gif?raw=true "bat")  |  ![bowl](mylib/misc/bowl.gif?raw=true "bpwl") 
 
 --- 
 
@@ -25,7 +25,13 @@ Cricket bowling             |  Cricket batting
 - A simple classifier is then connected to VGG16 and trained to identify if the frame belongs to class1 or 2. Then the top classifier is disconneceted and only dense layer with 1024 output size is used to obtain the sparse representations of each frame. 
 - Data to lstm format: For each video frame, the sparse representations are stacked into a tensor of size (NUM_FRAMES, LOOK_BACK, 1024). 
 
+<div align="center">
+<img src="https://github.com/saimj7/Video-Classification-in-Real-Time/blob/master/mylib/misc/model.jpg" width=450>
+<p>Model architecture</p>
+</div>
+
 ---
+
 **RNN:**
 - A standard LSTM is used. Note that you need GPU/CUDA support to run CUDnnLSTM layers in the model. Finally the LSTM network is trained to distinguish between your desired class1 and 2 videos.
 
@@ -39,16 +45,30 @@ pip install -r requirements.txt
 python run.py 
 ```
 > Note that the inference is set on test video file by default. To change it, adjust the config. options at the start of run.py
-- Trained model weights (for this example) can be downloaded from here: . Make sure you extract them into the folder 'weights'.
+- Trained model weights (for this example) can be downloaded from [**here**](https://drive.google.com/file/d/1mGm9jnZhelskbSzYAWWQoNcGa3mz95OL/view?usp=sharing). Make sure you extract them into the folder 'weights'.
+- The class probabilities and inference time per frames are also displayed.
 
+```
+[INFO] Frame acc. predictions: 0.91895014
+Frame inference in 0.0030 seconds
+```
 ## Pipeline
 
 ***Preprocessing:***
 - Some image processing is required before training your own data. In Preprocessing.ipynb file, the frames from each video classes are extracted and sorted into respective folders.
 - Note that the frames are resized to 224x224 dimensions (which is VGG16 input layer size).
+- The dataset can be downloaded from [**here**](https://www.crcv.ucf.edu/data/UCF101.php).
 
 ***Training:***
-- Train.ipynb 
+- Train.ipynb, as the name implies trains your model.
+- Training is visualized with the help of tensorboard. Use the command:
+```
+tensorboard --logdir data/_training_logs/rnn
+```
+<div align="center">
+<img src="https://github.com/saimj7/Video-Classification-in-Real-Time/blob/master/mylib/misc/train.jpg" width=350>
+<p>Training accuracy</p>
+</div>
 
 ## References
 
