@@ -170,8 +170,8 @@ if __name__ == '__main__':
                             print('[INFO] Sending mail...')
                             neg = np.mean(neg_certainty)
                             pos = np.mean(detect_certainty)
-                            time = total_frames * TAKE_FRAME / 30
-                            Mailer().send(MAIL, total_frames, time, pos, neg)
+                            time1 = total_frames * TAKE_FRAME / 30
+                            Mailer().send(MAIL, total_frames, time1, pos, neg)
                             print('[INFO] Mail sent')
                         detect_certainty = []
                         total_frames = 0
