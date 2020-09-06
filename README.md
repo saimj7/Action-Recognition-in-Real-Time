@@ -10,6 +10,8 @@ Cricket batting           |  Cricket batting/bowling
 
 --- 
 
+> Some of the use cases would be monitoring anomalies, suspicious human actions, alerting the staff/authorities.
+
 ## Table of Contents
 * [Background Theory](#background-theory)
 * [Running Inference](#running-inference)
@@ -26,8 +28,8 @@ Cricket batting           |  Cricket batting/bowling
 - Data to lstm format: For each video frame, the sparse representations are stacked into a tensor of size (NUM_FRAMES, LOOK_BACK, 1024). 
 
 <div align="center">
-<img src="https://github.com/saimj7/Video-Classification-in-Real-Time/blob/master/mylib/misc/model.jpg" width=450>
-<p>Model architecture</p>
+<img src="https://github.com/saimj7/Video-Classification-in-Real-Time/blob/master/mylib/misc/model.jpg" width=570>
+<p>- Model architecture -</p>
 </div>
 
 ---
@@ -47,11 +49,29 @@ python run.py
 > Note that the inference is set on test video file by default. To change it, adjust the config. options at the start of run.py
 - Trained model weights (for this example) can be downloaded from [**here**](https://drive.google.com/file/d/1mGm9jnZhelskbSzYAWWQoNcGa3mz95OL/view?usp=drivesdk). Make sure you extract them into the folder 'weights'.
 - The class probabilities and inference time per frames are also displayed.
-
 ```
 [INFO] Frame acc. predictions: 0.91895014
 Frame inference in 0.0030 seconds
 ```
+- You can also chose to send prdiction accuracies over the mail if desired. Follow the instructions in the config. of run.py and in mylib>Mailer.py
+
+<div align="center">
+<img src="https://github.com/saimj7/Video-Classification-in-Real-Time/blob/master/mylib/misc/alert.jpg" width=500>
+<p>- Predictions alert -</p>
+</div>
+
+- In case of false positivies. sure to optimize the threshold and total_frames (for mail) parameters to further narrow down the predictions.
+```
+Threshold = 0.50
+if pred >= Threshold:
+```
+
+```
+if total_frames > 5:
+   print('[INFO] Sending mail...')
+```
+
+
 ## Pipeline
 
 ***Preprocessing:***
@@ -66,8 +86,8 @@ Frame inference in 0.0030 seconds
 tensorboard --logdir data/_training_logs/rnn
 ```
 <div align="center">
-<img src="https://github.com/saimj7/Video-Classification-in-Real-Time/blob/master/mylib/misc/train.jpg" width=350>
-<p>Training accuracy</p>
+<img src="https://github.com/saimj7/Video-Classification-in-Real-Time/blob/master/mylib/misc/train.jpg" width=470>
+<p>- Training accuracy -</p>
 </div>
 
 ## References
