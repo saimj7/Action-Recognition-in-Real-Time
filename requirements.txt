@@ -1,0 +1,9 @@
+pandas
+numpy
+opencv-python
+matplotlib
+tqdm
+keras
+tensorflow
+smtplib
+ssl
