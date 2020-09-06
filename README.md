@@ -45,7 +45,7 @@ pip install -r requirements.txt
 python run.py 
 ```
 > Note that the inference is set on test video file by default. To change it, adjust the config. options at the start of run.py
-- Trained model weights (for this example) can be downloaded from [**here**](https://drive.google.com/file/d/1mGm9jnZhelskbSzYAWWQoNcGa3mz95OL/view?usp=sharing). Make sure you extract them into the folder 'weights'.
+- Trained model weights (for this example) can be downloaded from [**here**](https://drive.google.com/file/d/1mGm9jnZhelskbSzYAWWQoNcGa3mz95OL/view?usp=drivesdk). Make sure you extract them into the folder 'weights'.
 - The class probabilities and inference time per frames are also displayed.
 
 ```
