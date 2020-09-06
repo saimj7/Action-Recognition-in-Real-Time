@@ -60,7 +60,7 @@ Frame inference in 0.0030 seconds
 <p>- Predictions alert -</p>
 </div>
 
-- In case of false positivies. sure to optimize the threshold and total_frames (for mail) parameters to further narrow down the predictions.
+- In case of false positivies, make sure to optimize the threshold and total_frames (for mail) parameters to further narrow down the predictions.
 ```
 Threshold = 0.50
 if pred >= Threshold:
