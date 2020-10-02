@@ -4,4 +4,4 @@ opencv-python
 matplotlib
 tqdm
 keras
-tensorflow-gpu==1.13.1
+tensorflow-gpu
