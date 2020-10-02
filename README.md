@@ -24,8 +24,9 @@ Cricket batting           |  Cricket batting/bowling
 ## Background Theory
 **Feature extraction:**
 - Pretrained VGG16 is used as a feature extractor after fine tuning/unfreezing its 4 top layers.
-- A simple classifier is then connected to VGG16 and trained to identify if the frame belongs to class1 or 2. Then the top classifier is disconnected and only dense layer with 1024 output size is used to obtain the sparse representations of each frame. 
-- Data to lstm format: For each video frame, the sparse representations are stacked into a tensor of size (NUM_FRAMES, LOOK_BACK, 1024). 
+- A simple classifier is then connected to VGG16 and trained to identify if the frame belongs to class1 or 2. 
+- Then the top classifier is disconnected and only dense layer with 1024 output size is used to obtain the sparse representations of each frame. 
+- **Data to lstm format:** For each video frame, the sparse representations are stacked into a tensor of size (NUM_FRAMES, LOOK_BACK, 1024). 
 
 <div align="center">
 <img src="https://github.com/saimj7/Video-Classification-in-Real-Time/blob/master/mylib/misc/model.jpg" width=570>
@@ -35,7 +36,8 @@ Cricket batting           |  Cricket batting/bowling
 ---
 
 **RNN:**
-- A standard LSTM is used. Note that you need GPU/CUDA support to run CUDnnLSTM layers in the model. Finally, the LSTM network is trained to distinguish between your desired class1 and 2 videos.
+- A standard LSTM is used. Note that you need GPU/CUDA support if you would like to run CUDnnLSTM layers in the model. 
+- Finally, the LSTM network is trained to distinguish between your desired class1 and 2 videos.
 
 ## Running Inference
 - Install all the required Python dependencies:
@@ -46,9 +48,10 @@ pip install -r requirements.txt
 ```
 python run.py 
 ```
-> Note that the inference is set on test video file by default. To change it, adjust the config. options at the start of run.py
+- Note that the inference is set on the test video file by default. 
+- To change it, simply set ``` FROM_WEBCAM = False ``` in the config. options at mylib/Config.py
 - Trained model weights (for this example) can be downloaded from [**here**](https://drive.google.com/file/d/1mGm9jnZhelskbSzYAWWQoNcGa3mz95OL/view?usp=drivesdk). Make sure you extract them into the folder 'weights'.
-- The class probabilities and inference time per frames are also displayed.
+- The class probabilities and inference time per frames is also displayed:
 ```
 [INFO] Frame acc. predictions: 0.91895014
 Frame inference in 0.0030 seconds
@@ -61,7 +64,7 @@ Frame inference in 0.0030 seconds
 <p>- Predictions alert -</p>
 </div>
 
-- In case of false positivies, make sure to optimize the threshold and total_frames (for mail) parameters to further narrow down the predictions.
+- In case of false positivies, make sure to optimize the threshold and total_frames (for mail) parameters to further narrow down the predictions. Please refer config.
 ```
 Threshold = 0.50
 if pred >= Threshold:
@@ -76,7 +79,7 @@ if total_frames > 5:
 ## Pipeline
 
 ### Preprocessing:
-- Some image processing is required before training your own data! 
+- Some image processing is required before training on your own data! 
 - In 'Preprocessing.ipynb' file, the frames from each video classes are extracted and sorted into respective folders.
 - Note that the frames are resized to 224x224 dimensions (which is VGG16 input layer size).
 - The dataset can be downloaded from [**here**](https://www.crcv.ucf.edu/data/UCF101.php).
@@ -92,7 +95,7 @@ tensorboard --logdir data/_training_logs/rnn
 <p>- Training accuracy -</p>
 </div>
 
-- Make sure to review the parameters in config. options at mylib/config.py
+- Make sure to review the parameters in config. options at mylib/Config.py
 - You will come across the parameters in Train.ipynb, they must be same during the training and inference.
 - If you would like to change them, simply do so in the training file and also in config. options.
 

@@ -140,17 +140,16 @@ if __name__ == '__main__':
             if ret == True:
                 # Display the resulting frame
                 # Optimize the threshold (avg. prediction score for class labels) if desired
-                # 1 for class1 and 0 for class2
-                Threshold = 0.50
-                if pred >= Threshold:
+                # 1 for class1 and 0 for class2. Please refer config.
+                if pred >= config.Threshold:
                     __draw_label(full, 'Bowl', (20, 20), (255, 255, 255))
                     total_frames += 1
                     detect_certainty.append(pred)
                 else:
                     neg_certainty.append(pred)
                     if config.ALERT:
-                        # Adjust the total_frames (avg. score to send the mail)
-                        if total_frames > 5:
+                        # Adjust the total_frames (avg. score to send the mail). Refer config.
+                        if total_frames > config.positive_frames:
                             print('[INFO] Sending mail...')
                             neg = np.mean(neg_certainty)
                             pos = np.mean(detect_certainty)
