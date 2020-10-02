@@ -4,6 +4,4 @@ opencv-python
 matplotlib
 tqdm
 keras
-tensorflow
-smtplib
-ssl
+tensorflow-gpu==1.13.1
