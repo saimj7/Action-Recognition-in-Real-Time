@@ -49,7 +49,7 @@ pip install -r requirements.txt
 python run.py 
 ```
 - Note that the inference is set on the test video file by default. 
-- To change it, simply set ``` FROM_WEBCAM = False ``` in the config. options at mylib/Config.py
+- To change it, simply set ``` FROM_WEBCAM = True ``` in the config. options at mylib/Config.py
 - Trained model weights (for this example) can be downloaded from [**here**](https://drive.google.com/file/d/1mGm9jnZhelskbSzYAWWQoNcGa3mz95OL/view?usp=drivesdk). Make sure you extract them into the folder 'weights'.
 - The class probabilities and inference time per frames is also displayed:
 ```
@@ -64,7 +64,7 @@ Frame inference in 0.0030 seconds
 <p>- Predictions alert -</p>
 </div>
 
-- In case of false positivies, make sure to optimize the threshold and total_frames (for mail) parameters to further narrow down the predictions. Please refer config.
+- In case of severe false positivies, make sure to optimize the threshold and positive_frames parameters to further narrow down the predictions. Please refer config.
 ```
 Threshold = 0.50
 if pred >= Threshold:
