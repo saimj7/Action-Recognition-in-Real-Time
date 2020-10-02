@@ -16,15 +16,15 @@ Cricket batting           |  Cricket batting/bowling
 * [Background Theory](#background-theory)
 * [Running Inference](#running-inference)
 * [Pipeline](#pipeline)
-  - [Preprocessing](**preprocessing**)
-  - [Training](**training**)
+  - [Preprocessing](#preprocessing)
+  - [Training](#training)
 * [References](#references)
 * [Next Steps](#next-steps)
 
 ## Background Theory
 **Feature extraction:**
 - Pretrained VGG16 is used as a feature extractor after fine tuning/unfreezing its 4 top layers.
-- A simple classifier is then connected to VGG16 and trained to identify if the frame belongs to class1 or 2. Then the top classifier is disconneceted and only dense layer with 1024 output size is used to obtain the sparse representations of each frame. 
+- A simple classifier is then connected to VGG16 and trained to identify if the frame belongs to class1 or 2. Then the top classifier is disconnected and only dense layer with 1024 output size is used to obtain the sparse representations of each frame. 
 - Data to lstm format: For each video frame, the sparse representations are stacked into a tensor of size (NUM_FRAMES, LOOK_BACK, 1024). 
 
 <div align="center">
@@ -35,7 +35,7 @@ Cricket batting           |  Cricket batting/bowling
 ---
 
 **RNN:**
-- A standard LSTM is used. Note that you need GPU/CUDA support to run CUDnnLSTM layers in the model. Finally the LSTM network is trained to distinguish between your desired class1 and 2 videos.
+- A standard LSTM is used. Note that you need GPU/CUDA support to run CUDnnLSTM layers in the model. Finally, the LSTM network is trained to distinguish between your desired class1 and 2 videos.
 
 ## Running Inference
 - Install all the required Python dependencies:
@@ -53,7 +53,8 @@ python run.py
 [INFO] Frame acc. predictions: 0.91895014
 Frame inference in 0.0030 seconds
 ```
-- You can also chose to send prdiction accuracies over the mail if desired. Follow the instructions in the config. of run.py and in mylib>Mailer.py
+- You can also chose to send prediction accuracies over the mail if desired. Follow the instructions in mylib>Mailer.py (to setup the sender mail).
+- Enter the receiver mail in the config. options at mylib/Config.py
 
 <div align="center">
 <img src="https://github.com/saimj7/Video-Classification-in-Real-Time/blob/master/mylib/misc/alert.jpg" width=500>
@@ -74,14 +75,15 @@ if total_frames > 5:
 
 ## Pipeline
 
-***Preprocessing:***
-- Some image processing is required before training your own data. In Preprocessing.ipynb file, the frames from each video classes are extracted and sorted into respective folders.
+### Preprocessing:
+- Some image processing is required before training your own data! 
+- In 'Preprocessing.ipynb' file, the frames from each video classes are extracted and sorted into respective folders.
 - Note that the frames are resized to 224x224 dimensions (which is VGG16 input layer size).
 - The dataset can be downloaded from [**here**](https://www.crcv.ucf.edu/data/UCF101.php).
 
-***Training:***
-- Train.ipynb, as the name implies trains your model.
-- Training is visualized with the help of tensorboard. Use the command:
+### Training:
+- 'Train.ipynb', as the name implies trains your model.
+- Training is visualized with the help of TensorBoard. Use the command:
 ```
 tensorboard --logdir data/_training_logs/rnn
 ```
@@ -90,15 +92,21 @@ tensorboard --logdir data/_training_logs/rnn
 <p>- Training accuracy -</p>
 </div>
 
+- Make sure to review the parameters in config. options at mylib/config.py
+- You will come across the parameters in Train.ipynb, they must be same during the training and inference.
+- If you would like to change them, simply do so in the training file and also in config. options.
+
 ## References
 
 ***Main:***
-- coming soon
+- VGG16 paper: https://arxiv.org/pdf/1409.1556.pdf
+- UCF101 Action Recognition Data Set: https://www.crcv.ucf.edu/data/UCF101.php
 
 ***Optional:***
+- TensorBoard: https://www.tensorflow.org/tensorboard
 
 ## Next steps
-- coming soon
+- Investigate and benchmark different RNN architectures for better classifying the temporal sequences.
 
 <p>&nbsp;</p>
 
