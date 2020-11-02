@@ -125,7 +125,7 @@ tensorboard --logdir data/_training_logs/rnn
 - **Option 2**
     - 👯 Clone this repo:
     ```
-    $ git clone https://github.com/saimj7/Video-Classification-in-Real-Time.git
+    $ git clone https://github.com/saimj7/Action-Recognition-in-Real-Time.git
     ```
 
 - **Roll it!**
